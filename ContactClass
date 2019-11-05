@@ -1,0 +1,129 @@
+//Shannon McKinney
+//Contact Class
+import java.util.Iterator;
+import java.util.List;
+
+public class Contact extends MyDate{
+
+	
+		private String first;
+		private String last;
+		private String phone;
+		private MyDate bday;
+		
+	
+	public Contact() {				//default constructor
+	
+		first = "Shannon";
+		last = "McKinney";
+		phone = "4401234567";
+		bday = new MyDate();
+	}
+
+	public Contact(String f, String l, String p, MyDate b) {	//constructor
+		
+		first = f;
+		last = l;
+		phone = p;
+		bday = b;
+		
+	}
+	
+	public String toString() {				//to string function
+		
+		return("" + last + ", " + first + ", " + phone + ", " + bday);
+		
+	}
+	
+	public String getLast() {		//returns last
+		
+		return last;
+	}
+	
+	public String getFirst() {		//returns first
+		
+		return first;
+	}
+	
+	public String getPhone() {		//returns phone
+		
+		return phone;
+	}
+	
+	
+		public static void Remove(int index, List rolodex) {	//remove a person
+			
+			rolodex.remove(index-1);
+			
+		}
+		
+		
+		public static void NextPerson(List rolodex) {			//prints next person
+			
+			Iterator goThrough = rolodex.listIterator();
+			if(goThrough.hasNext())								//if has a next value
+			System.out.println(goThrough.next());
+			
+			else											//if not then print first index
+				System.out.println(rolodex.get(0));
+			
+		}
+		
+		public static void Previous(List rolodex, int x) {		//prints previous
+			
+			if(rolodex.get(x-1)==null) 						//if there's not a previous
+				System.out.println(rolodex.get(rolodex.size())); //then print last index
+			
+			else 											//else print previous index
+				System.out.println(rolodex.get(x-1));		
+		}
+		
+		public static void LookFirst(String name, List rolodex) {//prints rolodex with same first name
+			
+			String newCon;
+			int index = 0;
+			
+			newCon = ((Contact)rolodex.get(index)).getFirst();
+			
+			while(name.equals(newCon)==false) {					//continues until found name
+				
+				index++;
+				newCon = ((Contact)rolodex.get(index)).getFirst();
+			}
+			
+			System.out.println(rolodex.get(index));
+		}
+		
+		public static void LookLast(String name, List rolodex) {//prints rolodex with same last name
+			
+			String newCon;
+			int index = 0;
+			
+			newCon = ((Contact)rolodex.get(index)).getLast();
+			
+			while(name.equals(newCon)==false) {					//continues until found name
+				
+				index++;
+				newCon = ((Contact)rolodex.get(index)).getLast();
+			}
+			
+			System.out.println(rolodex.get(index));
+		}
+		
+		public static void LookPhone(String num, List rolodex) {//prints rolodex with same phone
+			
+			String newCon;
+			int index = 0;
+			
+			newCon = ((Contact)rolodex.get(index)).getPhone();
+			
+			while(num.equals(newCon)==false) {					//continues until found number
+				
+				index++;
+				newCon = ((Contact)rolodex.get(index)).getPhone();
+			}
+			
+			System.out.println(rolodex.get(index));
+		}
+	
+}
