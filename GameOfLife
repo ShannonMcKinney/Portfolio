@@ -1,0 +1,103 @@
+//Shannon McKinney
+//Game of Life
+// *=42  -=45
+
+public class GameOfLife {
+
+	public static void main(String[] args) {
+		
+		int xy[][]= {{5,5},{5,4},{3,4},{3,5},{5,6},{4,6},{3,6}};
+		char board[][] = new char[10][10];
+		char alive[][] = new char[10][10];
+		
+		for(int row = 0; row<board.length; row++) {			//sets board
+			
+			for(int column = 0; column<board[row].length; column++) {
+				
+				board[row][column] = 45;
+			}
+		}
+		
+		for(int row = 0; row<xy.length; row++)				//inputs points
+				board[(xy[row][1]-1)][(xy[row][0])] = 42;
+		
+		
+		for(int row = 0; row<board.length; row++) {			//prints board
+			
+			System.out.println();
+			
+			for(int column = 1; column<board[row].length; column++)
+				System.out.print(board[row][column] + " ");
+		}
+		
+		for(int row = 0; row<alive.length; row++) {			//sets alive = board
+			
+			for(int column = 0; column<alive[row].length; column++) {
+				
+				alive[row][column] = board[row][column];
+			}
+		}
+		
+		int total = 0;
+		while(total<6) {		//allows a number of generations
+		
+		for(int row = 0; row<board.length; row++) {			//sets board
+			
+			for(int column = 0; column<board[row].length; column++) {
+				
+				board[row][column] = alive[row][column];
+			}
+		}
+		
+		
+		int count = 0;
+		//checks around each point
+		
+		for(int x = 0; x<10; x++) {	//goes through point
+			
+			for(int y = 0; y<10; y++) {
+				
+				for(int column = (x-1); column<=(x+1); column++) { //check around the point
+					
+					for(int row = (y-1); row<=(y+1); row++) {
+						
+						if( row>=0 && column>=0 && row<=9 && column<=9 ) {
+							
+							if((row!=y)||(column!=x)) {
+								
+								if(board[row][column]==42) {//if one of the surrounding is alive then
+									count++;				//add to count
+								}
+							}
+						}
+					}
+				}
+				
+				if(board[y][x]==42) {				//if the middle is alive
+					if((count!= 3)&&(count!=2)) 	//and it doesn't have either 2 or 3 alive surrounding
+						alive[y][x]=45;				//then it dies
+				}
+				else{//board[y][x] ==45				//if middle is dead
+					if(count==3) 					//and it's surrounded by 3 alive
+						alive[y][x]=42;				//then it's alive
+				}
+				
+				count= 0; //set alive equal to something first
+				
+			}
+		}
+		
+		System.out.println("\n\n\n");
+		for(int row = 0; row<10; row++) {			//prints alive
+			
+			System.out.println();
+			for(int column = 1; column<10; column++) {
+
+				System.out.print(alive[row][column] + " ");
+			}
+		}
+		
+		total++;
+		}
+	}
+}
